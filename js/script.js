@@ -1,5 +1,8 @@
 //PROGRAMMA SOCIAL POST
 
+//array dei post con il like
+const likedPosts = [];
+
 //array del contenuto dei post
 const posts = [
     {
@@ -22,7 +25,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "09-03-2021"
+        "created": "02-09-2024"
     },
     {
         "id": 3,
@@ -33,7 +36,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "05-15-2021"
+        "created": "05-15-2023"
     },
     {
         "id": 4,
@@ -55,7 +58,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "03-05-2021"
+        "created": "03-05-2022"
     }
 ];
 
@@ -78,7 +81,7 @@ posts.slice().forEach(post => {
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${post.author.name}</div>
-                    <div class="post-meta__time">4 mesi fa</div>
+                    <div class="post-meta__time">${timeAgo(post.created)}</div>
                 </div>                    
             </div>
         </div>
@@ -118,6 +121,7 @@ posts.slice().forEach(post => {
             
             //verifico se il pulsante è già stato cliccato
             const isLiked = button.classList.contains("liked");
+            const postId = post.id;
 
             if (isLiked) {
 
@@ -129,7 +133,13 @@ posts.slice().forEach(post => {
                 likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
 
                 document.querySelector(`#color-text-${post.id}`).classList.remove("red-text");
-                
+
+                //rimuovo l'ID del post dall'array se non presente
+                const index = likedPosts.indexOf(postId);
+                if (index > -1) {
+                    likedPosts.splice(index, 1);
+                }
+
             } else {
 
                 //aggiungi il "Mi Piace"
@@ -140,8 +150,14 @@ posts.slice().forEach(post => {
                 likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
 
                 document.querySelector(`#color-text-${post.id}`).classList.add("red-text");
+
+                //aggiungo l'ID del post all'array se non presente
+                if (!likedPosts.includes(postId)) {
+                    likedPosts.push(postId);
+                }
             }
 
+            console.log(likedPosts);
         });
     });
 });
@@ -159,7 +175,24 @@ function timeAgo(postDate) {
 
     //converto i millisecondi ottenuti dal diffTime in giorni
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    //calcolo la differenza in mesi, 30.44 è l'approssimazione dei giorni in un mese
+    const diffMonths = Math.floor(diffDays / 30.44);
     
-    //risultato in giorni
-    return `${diffDays} giorni fa`;
+    //calcolo la differenza in anni
+    const diffYears = Math.floor(diffMonths / 12);
+    
+    //stabilisco il testo da visualizzare in base alla differenza temporale
+    let timeAgoText;
+
+    if (diffYears > 0) {
+        timeAgoText = `${diffYears} anno/i fa`;
+    } else if (diffMonths > 0) {
+        timeAgoText = `${diffMonths} mese/i fa`;
+    } else {
+        timeAgoText = `${diffDays} giorno/i fa`;
+    }
+    
+    //risultato
+    return timeAgoText;
 }
