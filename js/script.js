@@ -146,6 +146,20 @@ posts.slice().forEach(post => {
     });
 });
 
+//funzione per calcolare il tempo trascorso dalla pubblicazione del post
+function timeAgo(postDate) {
+    
+    //data del post
+    const date = new Date(postDate);
+    //data odierna
+    const now = new Date();
 
+    //differenza in millisecondi tra le date del post e la data odierna
+    const diffTime = Math.abs(now - date);
 
-
+    //converto i millisecondi ottenuti dal diffTime in giorni
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    //risultato in giorni
+    return `${diffDays} giorni fa`;
+}
