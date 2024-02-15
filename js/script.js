@@ -59,6 +59,22 @@ const posts = [
     }
 ];
 
+//seleziono l'elemento in cui inserire i post
+const postContainer = document.getElementById("#container");
+
+//itero attraverso ciascun post nell'array
+posts.slice(1).forEach(post => {
+
+    //creo un elemento post
+    const postElement = document.createElement("div");
+    postElement.classList.add("post");
+
+    console.log(postElement);
+});
+
+
+
+
 //aggiungo un ascoltatore al tasto mi piace di tutti i post
 const likeButtonElement = document.querySelectorAll("#like-button");
 
