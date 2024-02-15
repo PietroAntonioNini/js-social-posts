@@ -67,11 +67,5 @@ likeButtonElement.forEach(function(button) {
     button.addEventListener('click', function() {
         console.log("click");
         
-        //incremento il contatore dei "Mi Piace"
-        const likeCounter = document.querySelector(".js-likes-counter");
-        likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
-        
-        //cambio il colore del testo del pulsante
-        document.querySelector('.like-button__label').style.color = "red";
     });
 });
