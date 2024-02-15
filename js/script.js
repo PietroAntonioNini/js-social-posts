@@ -93,7 +93,7 @@ posts.slice().forEach(post => {
                 <div id="like-button-${post.id}" class="likes__cta">
                     <a class="like-button  js-like-button" href="#" data-postid="${post.id}">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
+                        <span id="color-text-${post.id}" class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
@@ -128,8 +128,7 @@ posts.slice().forEach(post => {
                 const likeCounter = document.querySelector(`#like-counter-${post.id}`);
                 likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
 
-                //il colore del testo del pulsante torna originale
-                document.querySelector(".like-button__label").style.color = "black";
+                document.querySelector(`#color-text-${post.id}`).classList.remove("red-text");
                 
             } else {
 
@@ -140,8 +139,7 @@ posts.slice().forEach(post => {
                 const likeCounter = document.querySelector(`#like-counter-${post.id}`);
                 likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
 
-                //cambio il colore del testo del pulsante
-                document.querySelector(".like-button__label").style.color = "red";
+                document.querySelector(`#color-text-${post.id}`).classList.add("red-text");
             }
 
         });

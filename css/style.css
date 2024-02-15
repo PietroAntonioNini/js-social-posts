@@ -103,6 +103,11 @@ h1 {
     align-items: center;
 }
 
+/* testo dei mi piace */
+.red-text {
+    color: red;
+}
+
 .like-button {
     display: inline-block;
     padding: 16px;
