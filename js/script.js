@@ -65,7 +65,6 @@ const postContainer = document.getElementById("container");
 //itero attraverso ciascun post nell'array
 posts.slice().forEach(post => {
 
-    console.log(post);
     //creo un elemento post
     const postElement = document.createElement("div");
     postElement.classList.add("post");
@@ -114,7 +113,6 @@ posts.slice().forEach(post => {
 
         button.addEventListener('click', function(event) {
             
-            console.log("click");
             //prevengo il comportamento dell'ancor(ricarica la pagina)
             event.preventDefault();
             
@@ -127,7 +125,7 @@ posts.slice().forEach(post => {
                 button.classList.remove("liked");
 
                 //decremento il contatore dei "Mi Piace"
-                const likeCounter = document.querySelector(".js-likes-counter");
+                const likeCounter = document.querySelector(`#like-counter-${post.id}`);
                 likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
 
                 //il colore del testo del pulsante torna originale
@@ -139,7 +137,7 @@ posts.slice().forEach(post => {
                 button.classList.add("liked");
 
                 //incremento il contatore dei "Mi Piace"
-                const likeCounter = document.querySelector(".js-likes-counter");
+                const likeCounter = document.querySelector(`#like-counter-${post.id}`);
                 likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
 
                 //cambio il colore del testo del pulsante
