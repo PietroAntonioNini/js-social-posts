@@ -65,7 +65,34 @@ const likeButtonElement = document.querySelectorAll("#like-button");
 likeButtonElement.forEach(function(button) {
 
     button.addEventListener('click', function() {
-        console.log("click");
+        
+        //verifico se il pulsante è già stato cliccato
+        const isLiked = button.classList.contains("liked");
+
+        if (isLiked) {
+
+            //rimuovi il "Mi Piace"
+            button.classList.remove("liked");
+
+            //decremento il contatore dei "Mi Piace"
+            const likeCounter = document.querySelector(".js-likes-counter");
+            likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
+
+            //il colore del testo del pulsante torna originale
+            document.querySelector(".like-button__label").style.color = "black";
+            
+        } else {
+
+            //aggiungi il "Mi Piace"
+            button.classList.add("liked");
+
+            //incremento il contatore dei "Mi Piace"
+            const likeCounter = document.querySelector(".js-likes-counter");
+            likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
+
+            //cambio il colore del testo del pulsante
+            document.querySelector(".like-button__label").style.color = "red";
+        }
         
     });
 });
